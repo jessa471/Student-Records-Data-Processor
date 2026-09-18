@@ -68,21 +68,30 @@ function findStudent(students, name) {
 function getCourseAverages(students) {
   const groupedStudents = groupByCourse(students);
 
-  return Object.entries(groupedStudents).reduce(
-    (courseAverages, [course, courseStudents]) => {
+  const courseAverages = Object.entries(groupedStudents).map(
+    ([course, courseStudents]) => {
       const totalAverage = courseStudents.reduce(
         (total, student) => total + getAverageGrade(student),
         0,
       );
 
-      courseAverages[course] = Number(
-        (totalAverage / courseStudents.length).toFixed(2),
-      );
-
-      return courseAverages;
+      return {
+        course,
+        average: Number(
+          (totalAverage / courseStudents.length).toFixed(2),
+        ),
+      };
     },
-    {},
   );
+
+  return courseAverages
+    .sort((firstCourse, secondCourse) => {
+      return secondCourse.average - firstCourse.average;
+    })
+    .reduce((sortedAverages, courseAverage) => {
+      sortedAverages[courseAverage.course] = courseAverage.average;
+      return sortedAverages;
+    }, {});
 }
 
 function exportSummary(students) {
@@ -98,6 +107,7 @@ function exportSummary(students) {
       students.length === 0
         ? 0
         : Number((totalAverage / students.length).toFixed(2)),
+    topPerformingStudent: getTopStudents(students, 1)[0] || null,
     topStudents: getTopStudents(students, 3),
     courseAverages: getCourseAverages(students),
     enrollment: getEnrolledCount(students),
