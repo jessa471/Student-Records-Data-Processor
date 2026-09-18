@@ -4,6 +4,7 @@
     "name": "Ana Santos",
     "course": "Computer Science",
     "yearLevel": 1,
+    "enrolled": true,
     "grades": {
       "Programming": 92,
       "Database Systems": 88,
@@ -15,6 +16,7 @@
     "name": "Ben Cruz",
     "course": "Information Technology",
     "yearLevel": 2,
+    "enrolled": true,
     "grades": {
       "Programming": 78,
       "Database Systems": 82,
@@ -26,6 +28,7 @@
     "name": "Carla Reyes",
     "course": "Computer Science",
     "yearLevel": 1,
+    "enrolled": false,
     "grades": {
       "Programming": 68,
       "Database Systems": 73,
@@ -37,10 +40,19 @@
     "name": "Daniel Lim",
     "course": "Information Systems",
     "yearLevel": 3,
+    "enrolled": true,
     "grades": {
       "Programming": 86,
       "Database Systems": 91,
       "Web Development": 89
     }
+  },
+  {
+    "id": "STU-005",
+    "name": "Elena Garcia",
+    "course": "Information Systems",
+    "yearLevel": 1,
+    "enrolled": false,
+    "grades": {}
   }
 ]
