@@ -1,1 +1,30 @@
 
+const fs = require('fs');
+
+// Load data from students.json
+let students = [];
+try {
+    const data = fs.readFileSync('students.json', 'utf8');
+    students = JSON.parse(data);
+} catch (error) {
+    console.error('Error: students.json not found or invalid JSON');
+    process.exit(1);
+}
+
+// 1. Get average grade of a student
+function getAverageGrade(student) {
+    if (!student || !Array.isArray(student.grades)) return 0;
+    if (student.grades.length === 0) return 0;
+
+    const sum = student.grades.reduce((acc, grade) => acc + grade, 0);
+    return sum / student.grades.length;
+}
+
+// 2. Get top n students by average grade
+function getTopStudents(students, n) {
+    if (!Array.isArray(students)) throw new Error('students must be an array');
+    if (typeof n !== 'number' || n < 0) throw new Error('n must be a positive number');
+
+    return [...students]
+       .map(student => ({...student, average: getAverageGrade(student) }))
+       .sort((a, b) => b.average
